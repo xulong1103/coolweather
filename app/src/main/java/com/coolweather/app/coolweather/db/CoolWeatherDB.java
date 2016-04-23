@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.coolweather.app.coolweather.model.City;
 import com.coolweather.app.coolweather.model.County;
 import com.coolweather.app.coolweather.model.Province;
+import com.coolweather.app.coolweather.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,8 @@ import java.util.List;
  * Created by lenovo on 2016/4/20.
  */
 public class CoolWeatherDB {
+
+    public static final String TAG = "CoolWeatherDB";
 
     public static final String DB_NAME = "cool_weather";
 
@@ -26,6 +29,7 @@ public class CoolWeatherDB {
     private SQLiteDatabase db;
 
     private CoolWeatherDB(Context context) {
+        LogUtil.i(TAG, "CoolWeatherDB");
         CoolWeatherOpenHelper dbHelper = new CoolWeatherOpenHelper(context, DB_NAME, null, VERSION);
         db = dbHelper.getWritableDatabase();
     }
@@ -38,6 +42,7 @@ public class CoolWeatherDB {
     public synchronized static CoolWeatherDB getInstance(Context context) {
         if (coolWeatherDB == null) {
             coolWeatherDB = new CoolWeatherDB(context);
+            LogUtil.i(TAG, "getInstance");
         }
         return coolWeatherDB;
     }
